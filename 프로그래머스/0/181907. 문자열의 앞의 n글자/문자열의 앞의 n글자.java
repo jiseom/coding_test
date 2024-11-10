@@ -1,12 +1,12 @@
+import java.util.*;
 class Solution {
-    public String solution(String my_string, int n) {
-        String answer = "";
-        char[] c = my_string.toCharArray();
+    public String solution(String my_string, int n) {        
+        StringBuilder sb = new StringBuilder();
         
         for (int i = 0; i < n; i++){
-            answer += c[i];
+          sb.append(my_string.charAt(i));
         }
 
-        return answer;
+     return sb.toString();
     }
 }
