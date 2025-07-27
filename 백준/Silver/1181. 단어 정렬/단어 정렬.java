@@ -1,8 +1,7 @@
-
 import java.util.*;
 import java.io.*;
 public class Main {
-    public static void main(String[]args) throws IOException {
+    public static void main(String[] args) throws IOException {
         BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
         int N = Integer.parseInt(bf.readLine());
 
@@ -11,22 +10,23 @@ public class Main {
             set.add(bf.readLine());
         }
 
-        String[] arr = set.toArray(new String[0]);
+        //list => set
+        List<String> list = new ArrayList<>(set);
 
-        Arrays.sort(arr,(a,b) -> {
-            if(a.length() != b.length()){
-                return a.length() - b.length();
-            }else{
-                return a.compareTo(b);
-            }
-        });
+        list.sort((a, b) -> {
+                    if (a.length() != b.length()) {
+                        return a.length() - b.length();
+                    } else {
+                        return a.compareTo(b);
+                    }
+                }
+        );
 
         StringBuilder sb = new StringBuilder();
-        for(int i = 0; i< arr.length; i++){
-            sb.append(arr[i]).append("\n");
+        for (String s : list) {
+            sb.append(s).append("\n");
         }
+
         System.out.print(sb);
     }
-
-
 }
