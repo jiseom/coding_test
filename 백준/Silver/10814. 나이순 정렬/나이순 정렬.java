@@ -1,55 +1,27 @@
 import java.util.*;
+
 public class Main {
-    static class Person {
-        int age;
-        String name;
-
-        public void setAge(int age) {
-            this.age = age;
-        }
-
-        public int getAge(){
-            return age;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public String toString() {
-            return age + " " + name;
-        }
-
-    }
-
     public static void main(String[] args) {
-
         Scanner scanner = new Scanner(System.in);
         int number = scanner.nextInt();
-        List<Person> list = new ArrayList<>();
+        String[][] arr = new String[number][2];
+
 
         for (int i = 0; i < number; i++) {
-            int age = scanner.nextInt();
-            String name = scanner.next();
-
-            Person person = new Person();
-            person.setAge(age);
-            person.setName(name);
-
-            list.add(person);
+            arr[i][0] = scanner.next();
+            arr[i][1] = scanner.next();
         }
 
-        list.sort(Comparator.comparingInt(p -> p.age));
+        Arrays.sort(arr, new Comparator<String[]>() {
+            @Override
+            public int compare(String[] o1, String[] o2) {
+                return Integer.parseInt(o1[0]) - Integer.parseInt(o2[0]);
+            }
+        });
 
-        for (Person person : list) {
-            System.out.println(person);
+        for (int i = 0; i < number; i++) {
+            System.out.println(arr[i][0] + " " + arr[i][1]);
         }
-
     }
-
 
 }
