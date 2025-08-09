@@ -1,27 +1,29 @@
 import java.io.*;
+import java.util.*;
+
 public class Main {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException{
         BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
-        String input = bf.readLine().replaceAll(" ", "");
-        char[] arr = input.toCharArray();
+        StringTokenizer st = new StringTokenizer(bf.readLine());
 
-        int acsendingCount = 0;
-        int descendingCount = 0;
+        int prev = Integer.parseInt(st.nextToken());
+        int curr =Integer.parseInt(st.nextToken());
 
-        for (int i = 0; i < arr.length -1; i++) {
-            if (arr[i] > arr[i + 1]) {
-                descendingCount++;
-            } else {
-                acsendingCount++;
+        int dir = curr > prev ? 1 : -1;
+
+        prev = curr;
+
+        while (st.hasMoreTokens()) {
+            curr = Integer.parseInt(st.nextToken());
+            int d = curr > prev ? 1: -1;
+            if (d != dir){
+                System.out.println("mixed");
+                return;
             }
+            prev = curr;
         }
 
-        if (acsendingCount == arr.length -1) {
-            System.out.print("ascending");
-        }else if (descendingCount == arr.length -1){
-            System.out.print("descending");
-        }else{
-            System.out.print("mixed");
-        }
+        System.out.print(dir == 1 ? "ascending" : "descending");
+
     }
 }
