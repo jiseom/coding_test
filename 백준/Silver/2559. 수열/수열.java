@@ -1,34 +1,56 @@
-import java.io.*;
 import java.util.*;
+import java.io.*;
 public class Main {
-    public static void main(String[] args) throws IOException {
-        BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
-        StringTokenizer st = new StringTokenizer(bf.readLine());
+    static BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
+    static StringTokenizer st;
 
-        int N = Integer.parseInt(st.nextToken());
-        int K = Integer.parseInt(st.nextToken());
+    public static void main(String[] args) throws Exception {
+        int N = nextInt();
+        int K = nextInt();
 
-        st = new StringTokenizer(bf.readLine());
-
-        int sum = 0;
-        
-        int[] arr = new int[N];
-        for (int i = 0; i < N; i++) {
-            arr[i] = Integer.parseInt(st.nextToken());
+        if (K > N) {
+            System.out.println(0);
+            return;
         }
-        
+        long sum = 0;
+
+        int[] buffer = new int[K];
         for (int i = 0; i < K; i++) {
-            sum += arr[i];
+            buffer[i] = nextInt();
+            sum += buffer[i];
         }
 
-        int max = sum;
+        long max = sum;
+        int idx = 0;
 
         for (int i = K; i < N; i++) {
-            sum += arr[i];
-            sum -= arr[i - K];
-            if (max < sum) max = sum;
-        }
+            int incoming = nextInt();
+            sum += incoming;
+            sum -= buffer[idx];
+            buffer[idx] = incoming;
 
+            if (++idx == K) {
+                idx = 0;
+            }
+            if (sum > max) {
+                max = sum;
+            }
+        }
         System.out.print(max);
+
+
     }
+
+    static int nextInt() throws IOException {
+        if (st == null || !st.hasMoreTokens()) {
+            String line = bf.readLine();
+            if (line == null) {
+                throw new EOFException();
+            }
+            st = new StringTokenizer(line);
+        }
+        return Integer.parseInt(st.nextToken());
+    }
+
+
 }
