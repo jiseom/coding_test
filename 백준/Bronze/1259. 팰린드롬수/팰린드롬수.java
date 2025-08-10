@@ -1,17 +1,20 @@
-import java.util.*;
-import java.io.*;
+import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         while (scanner.hasNext()) {
-            String input = scanner.next();
-            if (input.equals("0")) {
+            int n = scanner.nextInt();
+            if (n == 0) {
                 break;
             }
-            boolean equals =
-                    input.equals(new StringBuilder(input).reverse().toString());
-            if (equals) {
+            int rev = 0, temp = n;
+            while (temp > 0) {
+                rev = rev * 10 + temp % 10;
+                temp /= 10;
+            }
+            boolean isPalindrome = (n == rev);
+            if (isPalindrome) {
                 System.out.println("yes");
             } else {
                 System.out.println("no");
